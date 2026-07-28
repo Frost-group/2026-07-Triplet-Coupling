@@ -1,0 +1,37 @@
+% REVTeX guide: https://www.ctan.org/tex-archive/macros/latex/contrib/revtex
+\documentclass[aps,physrev,graphicx,amsmath,amssymb,reprint,superscriptaddress,nofootinbib,draft]{revtex4-2} % Two-column 'reprint'
+%\documentclass[aps,physrev,graphicx,amsmath,amssymb,linenumbers,preprint]{revtex4-2}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{mathtools}
+\usepackage{dcolumn}% Align table columns on decimal point
+\newcolumntype{d}[1]{D{.}{\cdot}{#1}}
+\usepackage{bm}% bold math
+\usepackage{xcolor,soul}
+\usepackage{physics}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+% FONT OPTIONS; mainly to break monotony when doing rounds of edits
+\usepackage{mathpazo} %JMF - Palatino + math font :^)
+%\usepackage{mlmodern} % 'fixed' computer modern with thicker weights
+\usepackage{siunitx}% JMF addition - once a physicist, always a physicist
+% Since version 2.1 siunitx supports so called comparators such as <, =, > and
+% also ~= \approx and ~ \sim. Use as: \SI{\sim 200}{\kelvin}
+%\bibliographystyle{aipnum4-1}
+\newcommand{\nb}[1]{\textcolor{purple}{#1}}
+\begin{document}
+\title{Triplet Exciton Transfer: The Counterpoise Approach}
+\date{\today} % useful to track hard copy of drafts
+
+\author{Tom Ward}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\author{Jarvist Moore Frost}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\affiliation{Department of Physics, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\email[Electronic mail:]{jarvist.frost@imperial.ac.uk}
+\keywords{path-integral, Monte Carlo}
+\begin{abstract}
+\end{abstract}
+\maketitle
+\section{Introduction}\label{introduction}
+\end{document}
