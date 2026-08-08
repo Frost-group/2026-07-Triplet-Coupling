@@ -1,0 +1,66 @@
+% REVTeX guide: https://www.ctan.org/tex-archive/macros/latex/contrib/revtex
+\documentclass[aps,physrev,graphicx,amsmath,amssymb,reprint,superscriptaddress,nofootinbib,draft]{revtex4-2} % Two-column 'reprint'
+%\documentclass[aps,physrev,graphicx,amsmath,amssymb,linenumbers,preprint]{revtex4-2}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{mathtools}
+\usepackage{dcolumn}% Align table columns on decimal point
+\newcolumntype{d}[1]{D{.}{\cdot}{#1}}
+\usepackage{bm}% bold math
+\usepackage{xcolor,soul}
+\usepackage{physics}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+% FONT OPTIONS; mainly to break monotony when doing rounds of edits
+\usepackage{mathpazo} %JMF - Palatino + math font :^)
+%\usepackage{mlmodern} % 'fixed' computer modern with thicker weights
+\usepackage{siunitx}% JMF addition - once a physicist, always a physicist
+% Since version 2.1 siunitx supports so called comparators such as <, =, > and
+% also ~= \approx and ~ \sim. Use as: \SI{\sim 200}{\kelvin}
+%\bibliographystyle{aipnum4-1}
+\newcommand{\nb}[1]{\textcolor{purple}{#1}}
+\begin{document}
+\title{Triplet Exciton Transfer: The Counterpoise Approach}
+\date{\today} % useful to track hard copy of drafts
+
+\author{Tom Ward}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\author{Isabel Creed}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\author{Jarvist Moore Frost}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK?Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\email[Electronic mail:]{jarvist.frost@imperial.ac.uk}
+\keywords{path-integral, Monte Carlo}
+\begin{abstract}
+\end{abstract}
+\maketitle
+\section{Introduction}\label{introduction}
+\section{Triplet Energy Transfer}\label{triplet energy transfer}
+Triplet energy transfer (TET) is driven primarily by Dexter, or exchange, coupling \cite{you2014theory}. The exchange coupling, is composed of one- and two-particle contributions. In the case of the one particle contribution,
+\begin{equation}
+    V_{1p} = \frac{-V_eV_h}{\Delta E}
+\end{equation}
+TET occurs in a two step process via CT diabatic states. $V_e$ and $V_h$ are the electron and hole couplings respectively, whilst $\Delta E$ is the difference in energy between the intermediate diabatic CT states. The electron and hole couplings are analogous to the transfer integral between the LUMO orbitals on each monomer and HOMO orbitals on each monomer respectively.
+
+We use the framework outlined by Baumeier et al. to obtain the transfer integrals in a dimer system. Here it is assumed that dimer valence orbitals arise from the interaction of the monomer frontier orbitals. To obtain the transfer integrals, Hamiltonian in the basis of the monomer orbitals undergoes Lowdin orthonormalisation. The off-diagonal elements of the resulting Hamiltonian correspond to the transfer integrals between the orbitals, or an effective overlap between these orbitals. 
+
+To calculate the the matrix element $J^{AB} = \langle\phi^A|H|\phi^B\rangle$, we use the same dimer projection (DIPRO) approach outlined by Baumeier et al.. Counterpoise basis to overcome BSSE. Here, the monomer orbitals, $\{\phi^A,\phi^B\}$, are projected onto the dimer orbitals, $\{\psi\}$. Noting that the dimer orbitals are orthogonal, this contracts to, 
+\begin{equation}
+    J^{AB} = \sum_i\langle\phi^A|\psi_i\rangle\langle\psi_i|H|\psi_i\rangle\langle\psi_i|\phi^B\rangle .
+\end{equation}
+DIPRO - Frozen orbital approximation - monomer orbital basis 
+In this work we propose an extension of this method to be able to describe the transfer integral between triplet excited states. Within the frozen orbital approximation, an excited state can be described as a liner combination of the ground state orbitals,
+\begin{equation}
+    \Psi_{state} = \sum_i c_i\psi_i
+\end{equation}
+
+
+- amplitudes from CI vector, normalised
+The two particle coupling,
+\begin{equation}
+    V_{2p} = \int dr_1dr_2 \frac{1}{|r_1-r_2|} S_{\pi^*_D \pi^*_A}S_{\pi_D\pi_A}
+\end{equation}
+
+The electron and hole couplings, $V_e$ and $V_h$, are the obtained from the HOMO-HOMO
+\section{}
+\end{document}
