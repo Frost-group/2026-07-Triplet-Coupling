@@ -8,8 +8,10 @@
 \newcolumntype{d}[1]{D{.}{\cdot}{#1}}
 \usepackage{bm}% bold math
 \usepackage{xcolor,soul}
+\usepackage{braket}
 \usepackage{physics}
 \usepackage{tikz}
+\usepackage{amsmath}
 \usetikzlibrary{decorations.markings}
 % FONT OPTIONS; mainly to break monotony when doing rounds of edits
 \usepackage{mathpazo} %JMF - Palatino + math font :^)
@@ -34,33 +36,153 @@
 \begin{abstract}
 \end{abstract}
 \maketitle
+Plan for paper
+\begin{enumerate}
+    \item \textbf{Introduction}
+    \item Triplet transfer in OPV materials
+    \item Current approaches to calculate triplet coupling, GMH family of fragment methods
+    \item \textbf{Methods}
+    \item Counterpoise method, overview and our expansion to describe excited states using CI vector (DFT analog)
+    \item One and two particle terms and expression in the counterpoise framework 
+    \item \textbf{Calculations}
+    \item Benchmarking: Naphthalene dimer separation and rotation, butadiene, pyrene 
+    \item Calculation of triplet couplings in Y6 dimers 
+\end{enumerate}
+
 \section{Introduction}\label{introduction}
 \section{Triplet Energy Transfer}\label{triplet energy transfer}
-Triplet energy transfer (TET) is driven primarily by Dexter, or exchange, coupling \cite{you2014theory}. The exchange coupling, is composed of one- and two-particle contributions. In the case of the one particle contribution,
+
+
+
+Triplet energy transfer (TET) is driven primarily by Dexter coupling \cite{you2014theory}. This is composed of one- and two-particle contributions. The one particle transfer $V_{1p}$ occurs through a two step process, with the electron and hole are transferred via a virtual CT state. 
 \begin{equation}
     V_{1p} = \frac{-V_eV_h}{\Delta E}
 \end{equation}
-TET occurs in a two step process via CT diabatic states. $V_e$ and $V_h$ are the electron and hole couplings respectively, whilst $\Delta E$ is the difference in energy between the intermediate diabatic CT states. The electron and hole couplings are analogous to the transfer integral between the LUMO orbitals on each monomer and HOMO orbitals on each monomer respectively.
+TET occurs in a two step process via 'virtual' CT diabatic states. $V_e$ and $V_h$ are the electron and hole couplings respectively, whilst $\Delta E$ is the difference in energy between the intermediate diabatic CT states. In the picture where only the HOMO and LUMO are involved in TET, $V_e$ and $V_h$ are the transfer intergrals between the LUMO orbitals on each of the monomers and the HOMO orbitals on each of the monomers respectively. The electron and hole couplings are analogous to the transfer integral between the LUMO orbitals on each monomer and HOMO orbitals on each monomer respectively.
 
-We use the framework outlined by Baumeier et al. to obtain the transfer integrals in a dimer system. Here it is assumed that dimer valence orbitals arise from the interaction of the monomer frontier orbitals. To obtain the transfer integrals, Hamiltonian in the basis of the monomer orbitals undergoes Lowdin orthonormalisation. The off-diagonal elements of the resulting Hamiltonian correspond to the transfer integrals between the orbitals, or an effective overlap between these orbitals. 
-
-To calculate the the matrix element $J^{AB} = \langle\phi^A|H|\phi^B\rangle$, we use the same dimer projection (DIPRO) approach outlined by Baumeier et al.. Counterpoise basis to overcome BSSE. Here, the monomer orbitals, $\{\phi^A,\phi^B\}$, are projected onto the dimer orbitals, $\{\psi\}$. Noting that the dimer orbitals are orthogonal, this contracts to, 
+The two particle contribution,
 \begin{equation}
-    J^{AB} = \sum_i\langle\phi^A|\psi_i\rangle\langle\psi_i|H|\psi_i\rangle\langle\psi_i|\phi^B\rangle .
+    V_{2p} = \int dr_Adr_B \frac{1}{|r_A-r_B|} S_{AB}(1)S_{AB}(2),
 \end{equation}
-DIPRO - Frozen orbital approximation - monomer orbital basis 
-In this work we propose an extension of this method to be able to describe the transfer integral between triplet excited states. Within the frozen orbital approximation, an excited state can be described as a liner combination of the ground state orbitals,
+involves a simultaneous transfer of electrons between the two monomers, where $|r_A-r_B|$ is the separation between the planes of each of the monomers . This is mediated by orbital overlap between the monomers, $S_{AB}(1)$ and $S_{AB}(2)$, which correspond to the orbitals involved in the transfer of each electron respectively.
+
+We use the framework outlined by Baumeier et al. to obtain the transfer integrals in a dimer system. 
+It was shown by Baumeier et al. that to obtain the transfer integral, $t_{AB}$, from the element $\bra{\phi_A}H\ket{\phi_B}$, in a Hamiltonian in the basis of the orbitals of the constituent monomers in a dimer, it is necessary to transform the Hamiltonina to an \textit{effective} Hamiltonian. This need arises from the fact that the monomer orbitals are not orthogonal to each other. In Lowdin orthonormalisation, this transform is achieved by multiplying both sides of $H$ by $S^{-1/2}$, where $S$ is the overlap matrix in the basis of the orbitals of the constituent monomers in a dimer. This yields
 \begin{equation}
-    \Psi_{state} = \sum_i c_i\psi_i
+    \begin{bmatrix}
+        E_1&J_{AB}\\
+        J_{AB}&E_2
+    \end{bmatrix}
+    \xrightarrow[Orthonorm.]{Lowdin}
+    \begin{bmatrix}
+     \epsilon_1&t_{AB}\\
+     t_{AB}&\epsilon_2
+    \end{bmatrix},
 \end{equation}
-
-
-- amplitudes from CI vector, normalised
-The two particle coupling,
+where $\epsilon_i$ is the energy of site $i$. The transfer integral,
 \begin{equation}
-    V_{2p} = \int dr_1dr_2 \frac{1}{|r_1-r_2|} S_{\pi^*_D \pi^*_A}S_{\pi_D\pi_A}
+    t_{ab} = \frac{1}{1-S_{AB}^2}\left(J_{AB} -\frac{1}{2}\left(E_1+E_2\right)S_{AB}\right)
 \end{equation}
 
-The electron and hole couplings, $V_e$ and $V_h$, are the obtained from the HOMO-HOMO
-\section{}
+To determine $J_{AB}$, it is convenient to project the monomer orbitals monomer orbitals, $\{\phi^A,\phi^B\}$, onto the, orthogonal, set of dimer orbitals, $\{\psi\}$, yielding 
+\begin{equation}
+    J_{AB} = \sum_i\langle\phi^A|\psi_i\rangle\langle\psi_i|H|\psi_i\rangle\langle\psi_i|\phi^B\rangle .
+\end{equation}
+Counterpoise corrected basis sets are also used together with the dimer projection (DIPRO) approach to overcome the basis set super-position error.
+In this work we propose an extension of this method to be able to describe the transfer integral between triplet excited states. Within the frozen orbital approximation, an excited state can be described as a liner combination of the ground state Kohn-Sham orbitals,
+\begin{equation}
+    \Psi_{state} = \sum_i c_i\psi_i,
+\end{equation}
+and hence we obtain the analog for $J^{AB}$ between excited states $i$ and $j$,
+\begin{equation}
+    J^{AB}_{IJ} = \sum_i\sum_j\sum_kc_i^*\langle\phi_i^A|\psi_k\rangle\langle\psi_k|H|\psi_k\rangle\langle\psi_k|\phi^B_j\rangle c_j.
+\end{equation}
+
+Inserting this into the expression relating the transfer integral $t_{AB}$ with the Hamiltonian element $J_{AB}$ given in Section \eqref{Derivation}, the transfer integral between states is given as,
+\begin{multline}  
+    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\ \cdot \sum_i\sum_jc_i^*c_j\left[J_{AB}^{orbitals}-\frac{1}{2}(E_1+E_2)S_{AB}^{orbitals}\right]\
+\end{multline}
+
+\section{Derivation of the State Transfer Integral}\label{Derivation}
+We being with the definition of the Hamiltonian and Overlap matrix for a dimer composed of two monomers, A and B. For the purpose of clarity, we will consider a two state system initially. 
+
+\begin{equation}
+    H = 
+    \begin{bmatrix}
+        E_1&J_{AB}\\
+        J_{AB} &E_2
+    \end{bmatrix}
+    ; \quad  S = 
+        \begin{bmatrix}
+        1&S_{AB}\\
+        S_{AB} &1
+    \end{bmatrix}.
+\end{equation}
+We use the method to obtain the transfer integrals, as shown by Baumeier et al. To obtain, the off-diagonal elements of $\underline{H}$,
+\begin{equation}
+    J_{AB} =\bra{\phi^A}\hat{H}\ket{\phi^B},
+\end{equation}
+it is more convenient to calculate this by projecting the monomer orbitals onto the dimer orbitals rather than directly computing the above integral. By inserting the identity operator, $\hat{1}= \sum_i|\psi_i\rangle\langle\psi_i|$ in the dimer orbital basis, we obtain:
+\begin{equation}
+    J_{AB} = \sum_k\sum_l \braket{\phi^A}{\psi_k}\bra{\psi_k}\hat{H}\ket{\psi_l}\braket{\psi_l}{\phi^B}.
+\end{equation}
+
+Noting that, unlike the orbitals on monomer A and B, the dimer orbitals are orthogonal, this contracts to:
+\begin{equation}
+    J_{AB} =\sum_k\braket{\phi^A}{\psi_k}\braket{\psi_k}{\hat{H}|\psi_k}\braket{\psi_k}{\phi^B}, 
+\end{equation}
+where $\{ \ket{\psi_k} \}$ are the dimer molecular orbitals.
+
+An excited state can be expressed as a linear combination of ground state orbitals:
+\begin{equation}
+   \ket{ \Phi }= \sum_i c_i \ket{\phi_i}
+\end{equation}
+Inserting this into (9) yields $\langle\Phi^A|H|\Phi^B\rangle$,
+\begin{equation}
+    J_{AB}^{state} = \sum_i\sum_j\sum_k c_i^*c_j \braket{\phi^A_i}{\psi_k}\braket{\psi_k}{\hat{H}|\psi_k}\braket{\psi_k}{\phi^B_j}.
+\end{equation}
+
+Up to this point, the issue that the orbitals on each of the monomers are not orthonormal to each other has not been resolved. To obtain the transfer integral, $t_{AB}$, between states $\Phi^A$ and $\Phi^B$, we transform the basis of $\underline{H}$ to obtain an \textit{effective} Hamiltonian, $\underline{H^{eff}}$. This transformation is achieved by the Lowdin symmetric orthonormalisation protocol:
+\begin{equation}
+    \underline{H}^{eff} = \underline{S}^{-1/2}\underline{H}\underline{S}^{-1/2}.
+\end{equation}
+It was shown that,
+\begin{equation}
+    \underline{S}^{-1/2} = \underline{U} \underline{S_0}^{-1/2}\underline{U}^T,
+\end{equation}
+where $\underline{S_0}$ is the matrix of eigenvalues of $\underline{S}$, and $\underline{U}$ is the matrix of eigenvectors of $\underline{S}$. In the case of our example 2 state system, $\underline{S}$ has eigenvalues $1\pm S_{AB}$ and eigenvectors
+\begin{equation}
+    v_1 = \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+    1\\1
+    \end{bmatrix}
+    ,  v_2 = \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+    1\\-1    
+    \end{bmatrix}
+\end{equation}
+Substituting $x_1 = (1+S_{AB})^{-1/2}$ and $x_2 = (1-S_{AB})^{-1/2}$, yields
+\begin{equation}
+    \underline{S}^{-1/2} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+        x_1+x_2 &x_1-x_2\\
+        x_1-x_2 & x_1+x_2
+    \end{bmatrix} 
+\end{equation}
+The off-diagonal elements of $H^{eff}$ are found to be 
+\begin{multline}
+    J^{eff}_{AB} = (E_1+E_2)(x_1+x_2)(x_1-x_2) \\ + 2J[(x_1+x_2)^2+(x_1-x_2)^2]
+\end{multline}
+, or re-substituting out $x_1$ and$x_2$,
+\begin{multline}
+    J^{eff}_{AB} = (E_1+E_2)\left[\frac{1}{1+S_{AB}}-\frac{1}{1-S_{AB}}\right]\\
+    + 2J_{AB}\left[\frac{1}{1+S_{AB}}+\frac{1}{1-S_{AB}}\right]
+\end{multline}
+This can be simplified, as also shown in Baumeier et al, to 
+\begin{equation}
+    J_{AB}^{eff} = \frac{J_{AB}-\frac{1}{2}(E_1+E_2)S_{AB}}{1-S_{AB}^2}
+\end{equation}
+Noting earlier, that we defined $J_{AB}^{state}$ as $\sum_i\sum_jc_i^*c_jJ_{AB,ij}^{orbitals}$, and that $S_{AB}$ is similarly $\sum_i\sum_jc_i^*c_j\langle\phi_{A,i}|\phi_{B,j}\rangle$, the final expression of the state transfer integral is 
+\begin{multline}
+    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot\\\cdot\sum_i\sum_jc_i^*c_j\left[J_{AB}^{orbitals}-\frac{1}{2}(E_1+E_2)S_{AB}^{orbitals}\right]\
+\end{multline}
 \end{document}
