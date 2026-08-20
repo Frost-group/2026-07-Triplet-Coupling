@@ -1,5 +1,5 @@
-% =========================================================================
-% FROST GROUP TEMPLATE: REVTeX 4-2 WITH ZAPF TYPOGRAPHY
+% =============== 20th August 2026 --- Version 0.0.1 ======================
+%         FROST GROUP TEMPLATE: REVTeX 4-2 WITH ZAPF TYPOGRAPHY
 % =========================================================================
 \documentclass[aps,physrev,reprint,superscriptaddress,nofootinbib,amsmath,amssymb,a4paper]{revtex4-2}
 % For peer review draft: swap 'reprint' -> 'preprint' and add 'linenumbers'
@@ -82,11 +82,30 @@ Plan for paper
 \end{enumerate}
 
 \section{Introduction}\label{introduction}
-\section{Triplet Energy Transfer}\label{triplet energy transfer}
+
+Design of organic electronic materials and understanding and interpretation of device physics and optical experiments are greatly enabled by chemically specific calculation of matrix elements that drive charge and energy transport through the materials. 
+These matrix elements are calculated from a physical model (by molecular dynamics simulation or otherwise) of the microstructure of the material, typically at the level of individual molecular dimers, and are then used to parameterise a rate equation for transport. 
+These rate equations are often semi-classical and based on Fermi's golden rule (i.e. a classical rate proportional to the matrix element squared, $\Gamma = J^2$), but the availability of reliable and chemically-specific matrix elements has enabled the development of more sophisticated and subtle transport models. 
+
+\emph{Electronic} transfer integrals calculated directly from quantum chemistry calculations are the most well established, with now over thirty years\cite{Cave1996} of sequential development\cite{Bredas2002}, with a wide range of methods and approximations. 
+Electron transfer is fundamentally a 1-electron process, though there are still considerable subtleties in choosing the diabatic basis, basis set supposition error, and compensating for polarisation effects. 
+\emph{Singlet excitonic} transfer integrals are dominated by the Coulomb interaction. 
+Adding chemical specificity beyond the F\"orster point-dipole approximation was first achieved by evaluating the Coulomb interaction on a discretised $3D$ grid (cubes)\cite{Krueger1998}. 
+More recently a multipole expansion method which is simply evaluated with partial charge fitted to a single molecular excited state calculation (TrESP) has been developed\cite{Madjet2006} and is generally found to be a suitable balance of accuracy and speed. 
+\emph{Triplet excitonic} transfer integrals, which drive Dexter transfer, are fundamentally more complicated. 
+Triplet excitations can be understood as the \emph{simultaneous} hopping of two electrons of \emph{opposite spin}, either directly (mediated by the two-electron exchange integral) or indirectly via superexchange (two sequential one-electron transfer integrals, via a virtual charge-transfer state). 
+Due to these slightly obtuse pathways, triplet exciton transfer is generally expected to be slower than electron transfer, and certainly slower than the long-range photon mediated single-exciton transfer. 
+Though triplet lifetimes are massively extended relative to singlet excitons due to the spin-forbidden nature of optical excitation, they are still very short compared to charge-carriers in a device. 
+Therefore due to the extra complexity of their modelling, and the lack of relevance of their short-ranged transport in device physics, there has been much effort and little motivation to develop their modelling. 
+
+A technical application where their transport absolutely does matter is in solid-state triplet-fusion upconversion devices\cite{Izawa2021}. 
+In prior \emph{liquid} devices, the triplet transfer is achieved by molecular diffusion. 
+In the \emph{solid-state} must instead rely on intrinsic triplet diffusion, and so we are suddenly motivated to develop a diverse set of methods to calculate these transfer integrals. 
 
 
 
-Triplet energy transfer (TET) is driven primarily by Dexter coupling\cite{you2014theory}. This is composed of one- and two-particle contributions. The one particle transfer $V_{1p}$ occurs through a two step process, with the electron and hole are transferred via a virtual CT state. 
+\section{Theory}\label{theory}
+Triplet energy transfer (TET) is driven primarily by Dexter coupling\cite{You2013}. This is composed of one- and two-particle contributions. The one particle transfer $V_{1p}$ occurs through a two step process, with the electron and hole are transferred via a virtual CT state. 
 \begin{equation}
     V_{1p} = \frac{-V_eV_h}{\Delta E}
 \end{equation}
