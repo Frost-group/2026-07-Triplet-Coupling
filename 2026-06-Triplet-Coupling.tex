@@ -103,8 +103,23 @@ Inserting this into the expression relating the transfer integral $t_{AB}$ with 
     J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\ \cdot \sum_i\sum_jc_i^*c_j\left[J_{AB}^{orbitals}-\frac{1}{2}(E_1+E_2)S_{AB}^{orbitals}\right]\
 \end{multline}
 
+
+As EET is driven by population transfer by frontier orbitals, it is convenient to rewrite the wavefunctions of the monomer excited states as a product of the core and frontier orbitals,
+\begin{align}
+    \Psi_A = |\psi_{A,core}\psi_{A,frontier}| \\
+    \Psi_B = |\psi_{B,core}\psi_{B,frontier}| 
+\end{align}
+.
+As shown by You \textit{et al\.}, where the two monomers have the same core orbitals, e.g. in dimer composed of homodimers, only the transfer integral between the frontier orbitals contributes to the overall transfer integral between electronic states.
+Hence, our state transfer integral becomes:
+
+\begin{multline}
+    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\ \cdot \sum_{i\in {F}}\sum_{j\in{F}}c_i^*c_j\left[J_{AB}-\frac{1}{2}(E_1+E_2)S_{AB}^{frontier}\right]\ ,
+\end{multline}
+where $\{F\}$ is the set of monomer frontier orbitals, and $S_{AB}$ is the weighted overlap between the frontier orbitals. 
 \section{Derivation of the State Transfer Integral}\label{Derivation}
 We being with the definition of the Hamiltonian and Overlap matrix for a dimer composed of two monomers, A and B. For the purpose of clarity, we will consider a two state system initially. 
+
 
 \begin{equation}
     H = 
