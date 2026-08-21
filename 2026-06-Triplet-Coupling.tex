@@ -102,12 +102,17 @@ A technical application where their transport absolutely does matter is in solid
 In prior \emph{liquid} devices, the triplet transfer is achieved by molecular diffusion. 
 In the \emph{solid-state} must instead rely on intrinsic triplet diffusion, and so we are suddenly motivated to develop a diverse set of methods to calculate these transfer integrals. 
 
+% other work
 
+One approach is to use \emph{constrained} density functional theory\cite{Yeganeh2010}. 
 
 \section{Theory}\label{theory}
+
+In the below we generally follow the nomenclature of Bai et al.\cite{Bai2020}. 
+
 Triplet energy transfer (TET) is driven primarily by Dexter coupling\cite{You2013}. This is composed of one- and two-particle contributions. The one particle transfer $V_{1p}$ occurs through a two step process, with the electron and hole are transferred via a virtual CT state. 
 \begin{equation}
-    V_{1p} = \frac{-V_eV_h}{\Delta E}
+    V_{1p} = - \frac{V_eV_h}{\Delta E}
 \end{equation}
 TET occurs in a two step process via 'virtual' CT diabatic states. $V_e$ and $V_h$ are the electron and hole couplings respectively, whilst $\Delta E$ is the difference in energy between the intermediate diabatic CT states. In the picture where only the HOMO and LUMO are involved in TET, $V_e$ and $V_h$ are the transfer intergrals between the LUMO orbitals on each of the monomers and the HOMO orbitals on each of the monomers respectively. The electron and hole couplings are analogous to the transfer integral between the LUMO orbitals on each monomer and HOMO orbitals on each monomer respectively.
 
@@ -118,7 +123,7 @@ The two particle contribution,
 involves a simultaneous transfer of electrons between the two monomers, where $|r_A-r_B|$ is the separation between the planes of each of the monomers . This is mediated by orbital overlap between the monomers, $S_{AB}(1)$ and $S_{AB}(2)$, which correspond to the orbitals involved in the transfer of each electron respectively.
 
 We use the framework outlined by Baumeier et al. to obtain the transfer integrals in a dimer system. 
-It was shown by Baumeier et al. that to obtain the transfer integral, $t_{AB}$, from the element $\bra{\phi_A}H\ket{\phi_B}$, in a Hamiltonian in the basis of the orbitals of the constituent monomers in a dimer, it is necessary to transform the Hamiltonina to an \textit{effective} Hamiltonian. This need arises from the fact that the monomer orbitals are not orthogonal to each other. In Lowdin orthonormalisation, this transform is achieved by multiplying both sides of $H$ by $S^{-1/2}$, where $S$ is the overlap matrix in the basis of the orbitals of the constituent monomers in a dimer. This yields
+It was shown by Baumeier et al. that to obtain the transfer integral, $t_{AB}$, from the element $\bra{\phi_A}H\ket{\phi_B}$, in a Hamiltonian in the basis of the orbitals of the constituent monomers in a dimer, it is necessary to transform the Hamiltonian to an \textit{effective} Hamiltonian. This need arises from the fact that the monomer orbitals are not orthogonal to each other. In Lowdin orthonormalisation, this transform is achieved by multiplying both sides of $H$ by $S^{-1/2}$, where $S$ is the overlap matrix in the basis of the orbitals of the constituent monomers in a dimer. This yields
 \begin{equation}
     \begin{bmatrix}
         E_1&J_{AB}\\
@@ -140,7 +145,7 @@ To determine $J_{AB}$, it is convenient to project the monomer orbitals monomer 
     J_{AB} = \sum_i\langle\phi^A|\psi_i\rangle\langle\psi_i|H|\psi_i\rangle\langle\psi_i|\phi^B\rangle .
 \end{equation}
 Counterpoise corrected basis sets are also used together with the dimer projection (DIPRO) approach to overcome the basis set super-position error.
-In this work we propose an extension of this method to be able to describe the transfer integral between triplet excited states. Within the frozen orbital approximation, an excited state can be described as a liner combination of the ground state Kohn-Sham orbitals,
+In this work we propose an extension of this method to be able to describe the transfer integral between triplet excited states. Within the frozen orbital approximation, an excited state can be described as a linear combination of the ground state Kohn-Sham orbitals,
 \begin{equation}
     \Psi_{state} = \sum_i c_i\psi_i,
 \end{equation}
@@ -169,7 +174,7 @@ Hence, our state transfer integral becomes:
 \end{multline}
 where $\{F\}$ is the set of monomer frontier orbitals, and $S_{AB}$ is the weighted overlap between the frontier orbitals. 
 \section{Derivation of the State Transfer Integral}\label{Derivation}
-We being with the definition of the Hamiltonian and Overlap matrix for a dimer composed of two monomers, A and B. For the purpose of clarity, we will consider a two state system initially. 
+We begin with the definition of the Hamiltonian and Overlap matrix for a dimer composed of two monomers, A and B. For the purpose of clarity, we will consider a two state system initially. 
 
 
 \begin{equation}
@@ -236,9 +241,9 @@ Substituting $x_1 = (1+S_{AB})^{-1/2}$ and $x_2 = (1-S_{AB})^{-1/2}$, yields
 \end{equation}
 The off-diagonal elements of $H^{eff}$ are found to be 
 \begin{multline}
-    J^{eff}_{AB} = (E_1+E_2)(x_1+x_2)(x_1-x_2) \\ + 2J[(x_1+x_2)^2+(x_1-x_2)^2]
+    J^{eff}_{AB} = (E_1+E_2)(x_1+x_2)(x_1-x_2) \\ + 2J[(x_1+x_2)^2+(x_1-x_2)^2], 
 \end{multline}
-, or re-substituting out $x_1$ and$x_2$,
+or re-substituting out $x_1$ and$x_2$,
 \begin{multline}
     J^{eff}_{AB} = (E_1+E_2)\left[\frac{1}{1+S_{AB}}-\frac{1}{1-S_{AB}}\right]\\
     + 2J_{AB}\left[\frac{1}{1+S_{AB}}+\frac{1}{1-S_{AB}}\right]
@@ -255,11 +260,12 @@ Noting earlier, that we defined $J_{AB}^{state}$ as $\sum_i\sum_jc_i^*c_jJ_{AB,i
 \begin{acknowledgements}
 % thank PEOPLE first, then funding
 
-% I.C. is supported by EPSRC (EP/Y020790/1). % NIA up-conversion grant
+ I.C. is supported by EPSRC (EP/Y020790/1). % NIA up-conversion grant
 J.M.F.
 is supported by a Royal Society University Research Fellowship
 (URF-R1-191292).
-% Tom / Emily / Tim / Ingvars / Elena / Abigail 'is supported by a Royal Society studentship attached to the above grant'
+T.W. is supported by a Royal Society PhD studentship attached to the above grant. 
+% Tom / Emily / Tim / Ingvars / Elena / Abigail 'is supported by a Royal Society PhD studentship attached to the above grant'
 
 Julia codes which implement the permutation-family based PIMC method are available on GitHub\cite{Halcyon.jl}.
 
