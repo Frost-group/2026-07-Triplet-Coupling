@@ -48,8 +48,8 @@
 %  use these for writing comments to one-another in preference to Overleaf
 % built-in, or writing on Zulip. That way the discussions persists in the git
 % history of the Paper writing. 
-\newcommand{\nb}[1]{\textcolor{purple}{#1}}
-\newcommand{\jarv}[1]{\textcolor{green}{#1}}
+\newcommand{\nb}[1]{\textcolor{red}{#1}}
+\newcommand{\jarv}[1]{\textcolor{purple}{#1}}
 
 \begin{document}
 \title{Triplet Exciton Transfer: The Counterpoise Approach}
@@ -94,9 +94,9 @@ Adding chemical specificity beyond the F\"orster point-dipole approximation was 
 More recently a multipole expansion method which is simply evaluated with partial charge fitted to a single molecular excited state calculation (TrESP) has been developed\cite{Madjet2006} and is generally found to be a suitable balance of accuracy and speed. 
 \emph{Triplet excitonic} transfer integrals, which drive Dexter transfer, are fundamentally more complicated. 
 Triplet excitations can be understood as the \emph{simultaneous} hopping of two electrons of \emph{opposite spin}, either directly (mediated by the two-electron exchange integral) or indirectly via superexchange (two sequential one-electron transfer integrals, via a virtual charge-transfer state). 
-Due to these slightly obtuse pathways, triplet exciton transfer is generally expected to be slower than electron transfer, and certainly slower than the long-range photon mediated single-exciton transfer. 
+Due to these slightly obtuse pathways, triplet exciton transfer is generally expected to be slower than electron transfer, and certainly slower than the long-range photon mediated singlet-exciton (F\"orster) transfer. 
 Though triplet lifetimes are massively extended relative to singlet excitons due to the spin-forbidden nature of optical excitation, they are still very short compared to charge-carriers in a device. 
-Therefore due to the extra complexity of their modelling, and the lack of relevance of their short-ranged transport in device physics, there has been much effort and little motivation to develop their modelling. 
+Therefore due to the extra complexity of modelling triplet transfer, and the lack of relevance of such slow and short-ranged transport to device physics, there been historically little motivation to develop models beyond simple perturbative approximations. 
 
 A technical application where their transport absolutely does matter is in solid-state triplet-fusion upconversion devices\cite{Izawa2021}. 
 In prior \emph{liquid} devices, the triplet transfer is achieved by molecular diffusion. 
@@ -104,7 +104,30 @@ In the \emph{solid-state} must instead rely on intrinsic triplet diffusion, and 
 
 % other work
 
-One approach is to use \emph{constrained} density functional theory\cite{Yeganeh2010}. 
+% Dissing on FED/FSD, but not sure if it should be here at the end of the intro...
+The field has increasingly moved to diabatisation approaches where adibatic states for the full dimer are rotated by a unitary transformation constructed to maximise excitation density on the constituent molecules, to transform to a localised diabatic basis\cite{You2013}. 
+These approaches have a number of conceptual and practical difficulties. 
+The dimer orbitals are non orthogonal, and so the fragment difference matrix is non Hermitian, and requires an artificial symmetrisation to be imposed before diagonalisation (see \cite{You2013} Eqn. 50). 
+For triplets, the fragment \emph{spin} difference (FSD) method requires extracting spin difference from the dimer excited states. 
+These approaches are often missing a physical spin density representation (e.g. linear-reponse TDDFT from the singlet ground state), or contaminated with unphysical high-spin states (e.g. unrestricted broken-symmetry approaches). 
+Additionally, one then blindly selects the adiabatic states, which in technically relevant systems are often of mixed CT-FE character. 
+Practically speaking we found these methods fragile to use for technically relevant systems. 
+
+One alternative approach is to use \emph{constrained} density functional theory\cite{Yeganeh2010}, where an additional Lagrange multiplier to maintain the spin constraint. 
+This can be cleanly defined in terms of spin for the $\bra{D^TA}$ initial and $\bra{DA^T}$ final states.  
+The charge-transfer superexchange triplet state $\bra{D^+A^-}$ is more awkward where the applied potential has to fight the delocalisation error of the functional.
+
+(GW/BSE \cite{Wehner2017}. )
+
+We therefore thought it would be useful to construct a set of methods based in our experience with dimer projection methods for the calculation of electronic transfer integrals. 
+The counterpoise correction provides an a mechanism to compensate for the basis set supposition error 
+By extending these methods to include a configuration interaction vector, taken as $c$--numbers from a calculation on isolated molecules, we ensure a spin-pure reference by construction. 
+From these effective electron and hole transfer integrals we can then explicitly construct an effective diabatic Hamiltonian, and explicitly handle the non-orthogonality by L\"owdin projection onto an effective two-state model. 
+
+This results in a robust approach to triplet transfer rooted in the extensive development and application of validated charge-carrier transfer integral methods, allowing for non-perturbative evaluation of the dominant superexchange pathway even when the intermediate CT states approach resonance. 
+
+For the example of Y6 (BTP-4F), a fused-ring electron acceptor of some technical importance, we show that the chemical design has created a material where this resonance occurs at the intermolecular packing spacing, driving maximally fast triplet transfer. 
+\jarv{To be confirmed!}
 
 \section{Theory}\label{theory}
 
@@ -123,7 +146,11 @@ The two particle contribution,
 involves a simultaneous transfer of electrons between the two monomers, where $|r_A-r_B|$ is the separation between the planes of each of the monomers . This is mediated by orbital overlap between the monomers, $S_{AB}(1)$ and $S_{AB}(2)$, which correspond to the orbitals involved in the transfer of each electron respectively.
 
 We use the framework outlined by Baumeier et al. to obtain the transfer integrals in a dimer system. 
-It was shown by Baumeier et al. that to obtain the transfer integral, $t_{AB}$, from the element $\bra{\phi_A}H\ket{\phi_B}$, in a Hamiltonian in the basis of the orbitals of the constituent monomers in a dimer, it is necessary to transform the Hamiltonian to an \textit{effective} Hamiltonian. This need arises from the fact that the monomer orbitals are not orthogonal to each other. In Lowdin orthonormalisation, this transform is achieved by multiplying both sides of $H$ by $S^{-1/2}$, where $S$ is the overlap matrix in the basis of the orbitals of the constituent monomers in a dimer. This yields
+It was shown by Baumeier et al. that to obtain the transfer integral, $t_{AB}$, from the element $\bra{\phi_A}H\ket{\phi_B}$, in a Hamiltonian in the basis of the orbitals of the constituent monomers in a dimer, it is necessary to transform the Hamiltonian to an \textit{effective} Hamiltonian. 
+This need arises from the fact that the monomer orbitals are not orthogonal to each other. 
+In L\"owdin orthonormalisation, this transform is achieved by multiplying both sides of $H$ by $S^{-1/2}$, where $S$ is the overlap matrix in the basis of the orbitals of the constituent monomers in a dimer. 
+This yields
+
 \begin{equation}
     \begin{bmatrix}
         E_1&J_{AB}\\
@@ -135,6 +162,7 @@ It was shown by Baumeier et al. that to obtain the transfer integral, $t_{AB}$, 
      t_{AB}&\epsilon_2
     \end{bmatrix},
 \end{equation}
+%
 where $\epsilon_i$ is the energy of site $i$. The transfer integral,
 \begin{equation}
     t_{ab} = \frac{1}{1-S_{AB}^2}\left(J_{AB} -\frac{1}{2}\left(E_1+E_2\right)S_{AB}\right)
@@ -144,6 +172,7 @@ To determine $J_{AB}$, it is convenient to project the monomer orbitals monomer 
 \begin{equation}
     J_{AB} = \sum_i\langle\phi^A|\psi_i\rangle\langle\psi_i|H|\psi_i\rangle\langle\psi_i|\phi^B\rangle .
 \end{equation}
+%
 Counterpoise corrected basis sets are also used together with the dimer projection (DIPRO) approach to overcome the basis set super-position error.
 In this work we propose an extension of this method to be able to describe the transfer integral between triplet excited states. Within the frozen orbital approximation, an excited state can be described as a linear combination of the ground state Kohn-Sham orbitals,
 \begin{equation}
@@ -156,7 +185,9 @@ and hence we obtain the analog for $J^{AB}$ between excited states $i$ and $j$,
 
 Inserting this into the expression relating the transfer integral $t_{AB}$ with the Hamiltonian element $J_{AB}$ given in Section \eqref{Derivation}, the transfer integral between states is given as,
 \begin{multline}  
-    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\ \cdot \sum_i\sum_jc_i^*c_j\left[J_{AB}^{orbitals}-\frac{1}{2}(E_1+E_2)S_{AB}^{orbitals}\right]\
+    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\
+    \sum_i\sum_jc_i^*c_j\left[J_{AB}^{orbitals}- 
+    \frac{1}{2}(E_1+E_2)S_{AB}^{orbitals}\right]\
 \end{multline}
 
 
@@ -170,9 +201,34 @@ As shown by You \textit{et al\.}, where the two monomers have the same core orbi
 Hence, our state transfer integral becomes:
 
 \begin{multline}
-    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\ \cdot \sum_{i\in {F}}\sum_{j\in{F}}c_i^*c_j\left[J_{AB}-\frac{1}{2}(E_1+E_2)S_{AB}^{frontier}\right]\ ,
+    J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot \\ \sum_{i\in {F}}\sum_{j\in{F}}c_i^*c_j\left[J_{AB}-\frac{1}{2}(E_1+E_2)S_{AB}^{frontier}\right]\ ,
 \end{multline}
 where $\{F\}$ is the set of monomer frontier orbitals, and $S_{AB}$ is the weighted overlap between the frontier orbitals. 
+
+
+
+\begin{acknowledgements}
+% thank PEOPLE first, then funding
+
+ I.C. is supported by EPSRC (EP/Y020790/1). % NIA up-conversion grant
+J.M.F.
+is supported by a Royal Society University Research Fellowship
+(URF-R1-191292).
+T.W. is supported by a Royal Society PhD studentship attached to the above grant. 
+% Tom / Emily / Tim / Ingvars / Elena / Abigail 'is supported by a Royal Society PhD studentship attached to the above grant'
+
+Julia codes which implement the permutation-family based PIMC method are available on GitHub\cite{Halcyon.jl}.
+
+We gratefully acknowledge the use of the Imperial College Research Computing Service\cite{HPC}.
+%Additionally, via our membership of the UK's HEC Materials Chemistry Consortium (MCC), funded by EPSRC (EP/R029431 and EP/X035859), this work used the \textsc{ARCHER2} UK National Supercomputing Service (http://www.archer2.ac.uk).
+\end{acknowledgements}
+
+\bibliography{2026-06-Triplet-Coupling}
+
+% SI below here...
+\clearpage
+\onecolumngrid
+
 \section{Derivation of the State Transfer Integral}\label{Derivation}
 We begin with the definition of the Hamiltonian and Overlap matrix for a dimer composed of two monomers, A and B. For the purpose of clarity, we will consider a two state system initially. 
 
@@ -257,22 +313,5 @@ Noting earlier, that we defined $J_{AB}^{state}$ as $\sum_i\sum_jc_i^*c_jJ_{AB,i
     J_{AB}^{eff,state} = \frac{1}{1-S_{AB}^2}\cdot\\\cdot\sum_i\sum_jc_i^*c_j\left[J_{AB}^{orbitals}-\frac{1}{2}(E_1+E_2)S_{AB}^{orbitals}\right]\
 \end{multline}
 
-\begin{acknowledgements}
-% thank PEOPLE first, then funding
-
- I.C. is supported by EPSRC (EP/Y020790/1). % NIA up-conversion grant
-J.M.F.
-is supported by a Royal Society University Research Fellowship
-(URF-R1-191292).
-T.W. is supported by a Royal Society PhD studentship attached to the above grant. 
-% Tom / Emily / Tim / Ingvars / Elena / Abigail 'is supported by a Royal Society PhD studentship attached to the above grant'
-
-Julia codes which implement the permutation-family based PIMC method are available on GitHub\cite{Halcyon.jl}.
-
-We gratefully acknowledge the use of the Imperial College Research Computing Service\cite{HPC}.
-%Additionally, via our membership of the UK's HEC Materials Chemistry Consortium (MCC), funded by EPSRC (EP/R029431 and EP/X035859), this work used the \textsc{ARCHER2} UK National Supercomputing Service (http://www.archer2.ac.uk).
-\end{acknowledgements}
-
-\bibliography{2026-06-Triplet-Coupling}
 
 \end{document}
