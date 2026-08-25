@@ -42,6 +42,7 @@
 \newcolumntype{d}[1]{D{.}{\cdot}{#1}}
 \usepackage{tikz}
 \usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}               % for Slater-diagram electron arrows
 \usepackage{xcolor,soul}                   % Text highlighting
 
 % --- Notes to self... --- 
@@ -213,6 +214,98 @@ Eqn
 Early work focused on evaluating this integral. Due to this overlap of four orbitals, if we have an election transfer integral which scales as ... We should expect to see double this exponential for two simultaneous electrons. 
 
 An alternative process is that of super exchange, where electrons transfer sequentially via a charge transfer (CT) state. It has been recognised since the 1990s, that as this is fundamentally controlled by individual electron transport steps, it has vastly reduced scaling with distance than the simultaneous two-particle route, and that it therefore dominates in the relatively large molecules of technical relevance for organic optoelectronic materials. 
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{\columnwidth}{!}{
+\begin{tikzpicture}[
+    % --- Global Styles ---
+    font=\large,
+    mo/.style={very thick, black, line cap=round}, % Molecular Orbital lines
+    up/.style={-{Straight Barb[left, round]}, very thick, black}, % Alpha spin (harpoon)
+    dn/.style={-{Straight Barb[left, round]}, very thick, black}, % Beta spin (harpoon)
+    hop/.style={->, >=stealth, very thick, dashed, black}, % State transition
+]
+
+    % --- Axis / Orbital Labels ---
+    \node[left] at (-0.2, 0) {HOMO};
+    \node[left] at (-0.2, 1.5) {LUMO};
+    
+    % ==========================================
+    % STATE 1: | D^T A >
+    % ==========================================
+    \begin{scope}[shift={(0,0)}]
+        \node at (1, -1.2) {$| D^T A \rangle$};
+        \node at (0.4, -0.5) {D}; 
+        \node at (1.6, -0.5) {A};
+        
+        % Donor (Triplet: 1 up in HOMO, 1 up in LUMO, centered)
+        \draw[mo] (0, 0) -- (0.8, 0); 
+        \draw[mo] (0, 1.5) -- (0.8, 1.5);
+        \draw[up] (0.4, -0.3) -- (0.4, 0.3);
+        \draw[up] (0.4, 1.2) -- (0.4, 1.8);
+        
+        % Acceptor (Ground State: paired in HOMO, empty LUMO)
+        \draw[mo] (1.2, 0) -- (2.0, 0);
+        \draw[mo] (1.2, 1.5) -- (2.0, 1.5);
+        \draw[up] (1.5, -0.3) -- (1.5, 0.3);
+        \draw[dn] (1.7, 0.3) -- (1.7, -0.3); % Drawn top-down
+    \end{scope}
+
+    % --- Transition 1: Electron Transfer (t_e) ---
+    \draw[hop] (2.4, 0.75) -- (3.6, 0.75) node[midway, above] {$t_e$};
+
+    % ==========================================
+    % STATE 2: | D^+ A^- > (Charge Transfer)
+    % ==========================================
+    \begin{scope}[shift={(4,0)}]
+        \node at (1, -1.2) {$| D^+ A^- \rangle$};
+        \node at (0.4, -0.5) {D$^+$}; 
+        \node at (1.6, -0.5) {A$^-$};
+        
+        % Donor (Cation: 1 up in HOMO, empty LUMO)
+        \draw[mo] (0, 0) -- (0.8, 0); 
+        \draw[mo] (0, 1.5) -- (0.8, 1.5);
+        \draw[up] (0.4, -0.3) -- (0.4, 0.3);
+        
+        % Acceptor (Anion: paired in HOMO, 1 up in LUMO)
+        \draw[mo] (1.2, 0) -- (2.0, 0);
+        \draw[mo] (1.2, 1.5) -- (2.0, 1.5);
+        \draw[up] (1.5, -0.3) -- (1.5, 0.3);
+        \draw[dn] (1.7, 0.3) -- (1.7, -0.3);
+        \draw[up] (1.6, 1.2) -- (1.6, 1.8);
+    \end{scope}
+
+    % --- Transition 2: Hole Transfer (t_h) ---
+    \draw[hop] (6.4, 0.75) -- (7.6, 0.75) node[midway, above] {$t_h$};
+
+    % ==========================================
+    % STATE 3: | D A^T >
+    % ==========================================
+    \begin{scope}[shift={(8,0)}]
+        \node at (1, -1.2) {$| D A^T \rangle$};
+        \node at (0.4, -0.5) {D}; 
+        \node at (1.6, -0.5) {A};
+        
+        % Donor (Ground State: paired in HOMO, empty LUMO)
+        % Note: The down spin hopped here from the acceptor!
+        \draw[mo] (0, 0) -- (0.8, 0); 
+        \draw[mo] (0, 1.5) -- (0.8, 1.5);
+        \draw[up] (0.3, -0.3) -- (0.3, 0.3);
+        \draw[dn] (0.5, 0.3) -- (0.5, -0.3);
+        
+        % Acceptor (Triplet: 1 up in HOMO, 1 up in LUMO)
+        \draw[mo] (1.2, 0) -- (2.0, 0);
+        \draw[mo] (1.2, 1.5) -- (2.0, 1.5);
+        \draw[up] (1.6, -0.3) -- (1.6, 0.3);
+        \draw[up] (1.6, 1.2) -- (1.6, 1.8);
+    \end{scope}
+\end{tikzpicture} }
+
+\caption{Slater orbital diagram for the most simple HOMO--LUMO triplet excitation, transfering via the superexchange pathway.}
+    \label{fig:superexchange_slater_diagram}
+\end{figure}
+
 
 The often quoted expression is
 
