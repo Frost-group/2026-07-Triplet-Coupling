@@ -140,9 +140,70 @@ For the example of Y6 (BTP-4F), a fused-ring electron acceptor of some technical
 \end{itemize}
 
 % written on phone at net park
-Triplet transfer was first studied in detail by Dexter (cite). In singlets, transport is dominated by radiatively coupled Forster transfer, with the emission and absorption of a virtual photon enabling long distance transfer with a characteristic 1/r^3 from dipole coupling in the far field limit. Due to optical transitions being spin forbidden in triplets, this route is severely attenuated. Therefore transfer occurs by the physical transport of the two electrons associated with the excited state. 
+Triplet transfer was first studied in detail by Dexter (cite). In singlets, transport is dominated by radiatively coupled Forster transfer, with the emission and absorption of a virtual photon enabling long distance transfer with a characteristic $1/r^3$ from dipole coupling in the far field limit. Due to optical transitions being spin forbidden in triplets, this route is severely attenuated. Therefore transfer occurs by the physical transport of the two electrons associated with the excited state. 
 
 Diagram.
+
+\begin{figure}[htbp]
+    \centering
+% Google Gemini starting point, then edited with https://tikz.dev/editor/web/ - JMF
+\begin{tikzpicture}[
+    % --- Global Styles ---
+    font=\large, 
+    level/.style={very thick, black, line cap=round},
+    coupling/.style={->, >=stealth, very thick, dashed, blue!80!black},
+    direct/.style={->, >=stealth, very thick, dotted, red!80!black},
+    xscale=1.0, 
+    yscale=1.0
+]
+
+    % --- Y-Axis (Energy) ---
+    \draw[->, thick, >=stealth] (-0.5, -0.5) -- (-0.5, 2.8) node[above] {E};
+
+    % --- state |1> ---
+    \coordinate (D_start) at (0, 0);
+    \coordinate (D_end)   at (1, 0);
+    \draw[level] (D_start) -- (D_end) node[midway, below=0.15cm] {$| D^T A \rangle$};
+
+    % --- State |2> - CT ---
+    \coordinate (CT_start) at (2.5, 2.0);
+    \coordinate (CT_end)   at (3.5, 2.0);
+    \draw[level] (CT_start) -- (CT_end) node[midway, above=0.15cm] {$| D^+ A^- \rangle$};
+
+    % --- State |3> Acceptor, offset by delta-G ---
+    \coordinate (A_start) at (5, 0.5);
+    \coordinate (A_end)   at (6, 0.5);
+    \draw[level] (A_start) -- (A_end) node[midway, below=0.15cm] {$| D A^T \rangle$};
+
+    % --- Couplings (Straight Arrows, Hardcoded Offsets) ---
+    % t_e path: starts slightly above D_end
+    \draw[coupling] (1, 0.05) -- (CT_start) 
+        node[midway, above left, text=black] {$t_e$};
+        
+    % t_h path: ends slightly above A_start
+    \draw[coupling] (CT_end) -- (5, 0.55) 
+        node[midway, above right, text=black] {$t_h$};
+
+    % Dexter direct exchange: routed below the states
+    \draw[direct] (1.12, -0.67) -- (4.86, -0.18) 
+        node[midway, below right, text=black] {$V_{2p}$};
+
+    % --- Energy Scales ---
+    % Delta G
+    \draw[<->, >=stealth, thin] (6.3, 0) -- (6.3, 0.5) 
+        node[midway, right] {$\Delta G$};
+
+    % Delta E_CT
+    \draw[<->, >=stealth, thin] (2.92, -0.04) -- (2.92, 1.96) 
+        node[midway, right] {$\Delta E_{CT}$};
+
+\end{tikzpicture}
+\caption{Diabatic three-state Jablonski diagram. 
+Transfer can be by direct two-particle exchange ($V_{2p}$, dotted line) or by super-exchange via a virtual charge-transfer (CT) state (here just $| D^+ A^- \rangle$ is shown, though of course the opposite order can occur with a potentially different $\Delta E_{CT}$). 
+The process is by sequential single-particle electron ($t_e$) and hole ($t_h$) (and vice versa) transfers. 
+$\Delta E_{CT}$ is the energy of the CT state relative to the initial donor triplet; as usual $\Delta G$ represents the thermodynamic driving force from the reactan to the product.}
+    \label{fig:diabatic_jablonski}
+\end{figure}
 
 The most obvious physical picture is the direct simultaneous transfer of the hole and electron, proportional to the overlap of the four molecular orbitals on the two molecules, 
 
@@ -161,6 +222,12 @@ Clearly the 1/ECT component suggests a perturbation theory origin for this expre
 
 Therefore in this paper we will first investigate the v1p expression, and then develop methods to evaluate the charge transfer state energy, and a configuration interaction generalisation of the counterpoise corrected dimer projection method. 
 % written on phone
+
+\subsection{Single-particle super-exchange pathway, $V_{1p}$}
+
+\subsection{The charge-transfer state energy}
+
+\subsection{Configuration-interaction dimer projection method}
 
 In the below we generally follow the nomenclature of Bai et al.\cite{Bai2020}. 
 
