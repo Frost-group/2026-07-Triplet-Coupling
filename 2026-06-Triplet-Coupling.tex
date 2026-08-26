@@ -1,13 +1,13 @@
-% =============== 20th August 2026 --- Version 0.0.1 ======================
+% =============== 26th August 2026 --- Version 0.0.2 ======================
 %         FROST GROUP TEMPLATE: REVTeX 4-2 WITH ZAPF TYPOGRAPHY
-% =========================================================================
+% ======== https://github.com/Frost-group/Frost-LaTeX-templates ===========
 \documentclass[aps,physrev,reprint,superscriptaddress,nofootinbib,amsmath,amssymb,a4paper]{revtex4-2}
 % For peer review draft: swap 'reprint' -> 'preprint' and add 'linenumbers'
 
 % BIBLIOGRAPHY: Generate a clean bibliography via https://www.doi2bib.org/
 %    check individual entries as you add them: don't shotgun them in
-% citations keys look like "Frost2016" etc. ; so adding a descriptive noun
-% afterwards can be useful if you are citing a group / author a lot, e.g. "Frost2017PolaronPRB"
+% Citation keys look like "Frost2016"; so adding a descriptive noun suffix 
+% can be useful if you are citing a group / author a lot, e.g. "Frost2017PolaronPRB"
 
 % --- Typography & Fonts ---
 %  Of course, the journal will override this, but this is for us and the ArXiv
@@ -48,9 +48,15 @@
 % --- Notes to self... --- 
 %  use these for writing comments to one-another in preference to Overleaf
 % built-in, or writing on Zulip. That way the discussions persists in the git
-% history of the Paper writing. 
-\newcommand{\nb}[1]{\textcolor{red}{#1}}
-\newcommand{\jarv}[1]{\textcolor{purple}{#1}}
+% history of the Paper. Pick a colour and add yourself!
+% Good colours for screen (not too bright) and B&W printing (distinct from black) include:
+%     red, purple, teal, olive, brown, darkgray, violet
+\newcommand{\nb}[1]{\textcolor{red!50!black}{[NB: #1]}}
+\newcommand{\jarv}[1]{\textcolor{purple}{[Jarv: #1]}}
+% 
+\newcommand{\authorA}[1]{\textcolor{teal}{[AuthorA: #1]}}
+\newcommand{\authorB}[1]{\textcolor{orange!80!black}{[AuthorB: #1]}}
+\newcommand{\authorC}[1]{\textcolor{green!40!black}{[AuthorC: #1]}}
 
 \begin{document}
 \title{Triplet Exciton Transfer: The Counterpoise Approach}
