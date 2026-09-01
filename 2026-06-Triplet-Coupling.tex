@@ -54,8 +54,8 @@
 \newcommand{\nb}[1]{\textcolor{red!50!black}{[NB: #1]}}
 \newcommand{\jarv}[1]{\textcolor{purple}{[Jarv: #1]}}
 % 
-\newcommand{\authorA}[1]{\textcolor{teal}{[AuthorA: #1]}}
-\newcommand{\authorB}[1]{\textcolor{orange!80!black}{[AuthorB: #1]}}
+\newcommand{\izzy}[1]{\textcolor{teal}{[AuthorA: #1]}}
+\newcommand{\tom}[1]{\textcolor{orange!80!black}{[AuthorB: #1]}}
 \newcommand{\authorC}[1]{\textcolor{green!40!black}{[AuthorC: #1]}}
 
 \begin{document}
@@ -89,10 +89,12 @@ Plan for paper
     \item Calculation of triplet couplings in Y6 dimers 
 \end{enumerate}
 
+\jarv{2026-09-01: need to make a slightly tighter plan for the calculations above. Maybe start a repo with the reference geometries which we are intending to use? Coordinate electronic structure methods for consistency? Delta-ECT state energies, via PBE0, OT-RSH and DLPNO EOM-CCSD? Where best to do this? In this document, or a Kanban board etc. ?}
+
 \section{Introduction}\label{introduction}
 
 Design of organic electronic materials and understanding and interpretation of device physics and optical experiments are greatly enabled by chemically specific calculation of matrix elements that drive charge and energy transport through the materials. 
-These matrix elements are calculated from a physical model (by molecular dynamics simulation or otherwise) of the microstructure of the material, typically at the level of individual molecular dimers, and are then used to parameterise a rate equation for transport. 
+These matrix elements are calculated from a physical model (by molecular dynamics simulation or otherwise) of the microstructure of the material, typically at the level of individual molecular dimers, and are then used to parametrise a rate equation for transport. 
 These rate equations are often semi-classical and based on Fermi's golden rule (i.e. a classical rate proportional to the matrix element squared, $\Gamma = J^2$), but the availability of reliable and chemically-specific matrix elements has enabled the development of more sophisticated and subtle transport models. 
 
 \emph{Electronic} transfer integrals calculated directly from quantum chemistry calculations are the most well established, with now over thirty years\cite{Cave1996} of sequential development\cite{Bredas2002}, with a wide range of methods and approximations. 
@@ -101,7 +103,7 @@ Electron transfer is fundamentally a 1-electron process, though there are still 
 Adding chemical specificity beyond the F\"orster point-dipole approximation was first achieved by evaluating the Coulomb interaction on a discretised $3D$ grid (cubes)\cite{Krueger1998}. 
 More recently a multipole expansion method which is simply evaluated with partial charge fitted to a single molecular excited state calculation (TrESP) has been developed\cite{Madjet2006} and is generally found to be a suitable balance of accuracy and speed. 
 \emph{Triplet excitonic} transfer integrals, which drive Dexter transfer, are fundamentally more complicated. 
-Triplet excitations can be understood as the \emph{simultaneous} hopping of two electrons of \emph{opposite spin}, either directly (mediated by the two-electron exchange integral) or indirectly via superexchange (two sequential one-electron transfer integrals, via a virtual charge-transfer state). 
+Triplet excitations can be understood as the \emph{simultaneous} hopping of two electrons of \emph{opposite spin}, either directly (mediated by the two-electron exchange integral) or indirectly via super exchange (two sequential one-electron transfer integrals, via a virtual charge-transfer state). 
 Due to these slightly obtuse pathways, triplet exciton transfer is generally expected to be slower than electron transfer, and certainly slower than the long-range photon mediated singlet-exciton (F\"orster) transfer. 
 Though triplet lifetimes are massively extended relative to singlet excitons due to the spin-forbidden nature of optical excitation, they are still very short compared to charge-carriers in a device. 
 Therefore due to the extra complexity of modelling triplet transfer, and the lack of relevance of such slow and short-ranged transport to device physics, there been historically little motivation to develop models beyond simple perturbative approximations. 
@@ -117,13 +119,13 @@ The field has increasingly moved to diabatisation approaches where adibatic stat
 These approaches have a number of conceptual and practical difficulties. 
 The dimer orbitals are non orthogonal, and so the fragment difference matrix is non Hermitian, and requires an artificial symmetrisation to be imposed before diagonalisation (see \cite{You2013} Eqn. 50). 
 For triplets, the fragment \emph{spin} difference (FSD) method requires extracting spin difference from the dimer excited states. 
-These approaches are often missing a physical spin density representation (e.g. linear-reponse TDDFT from the singlet ground state), or contaminated with unphysical high-spin states (e.g. unrestricted broken-symmetry approaches). 
+These approaches are often missing a physical spin density representation (e.g. linear-response TDDFT from the singlet ground state), or contaminated with unphysical high-spin states (e.g. unrestricted broken-symmetry approaches). 
 Additionally, one then blindly selects the adiabatic states, which in technically relevant systems are often of mixed CT-FE character. 
 Practically speaking we found these methods fragile to use for technically relevant systems. 
 
 One alternative approach is to use \emph{constrained} density functional theory\cite{Yeganeh2010}, where an additional Lagrange multiplier to maintain the spin constraint. 
 This can be cleanly defined in terms of spin for the $\bra{D^TA}$ initial and $\bra{DA^T}$ final states.  
-The charge-transfer superexchange triplet state $\bra{D^+A^-}$ is more awkward where the applied potential has to fight the delocalisation error of the functional.
+The charge-transfer super exchange triplet state $\bra{D^+A^-}$ is more awkward where the applied potential has to fight the delocalisation error of the functional.
 
 (GW/BSE \cite{Wehner2017}. )
 
@@ -132,7 +134,7 @@ The counterpoise correction provides an a mechanism to compensate for the basis 
 By extending these methods to include a configuration interaction vector, taken as $c$--numbers from a calculation on isolated molecules, we ensure a spin-pure reference by construction. 
 From these effective electron and hole transfer integrals we can then explicitly construct an effective diabatic Hamiltonian, and explicitly handle the non-orthogonality by L\"owdin projection onto an effective two-state model. 
 
-This results in a robust approach to triplet transfer rooted in the extensive development and application of validated charge-carrier transfer integral methods, allowing for non-perturbative evaluation of the dominant superexchange pathway even when the intermediate CT states approach resonance. 
+This results in a robust approach to triplet transfer rooted in the extensive development and application of validated charge-carrier transfer integral methods, allowing for non-perturbative evaluation of the dominant super exchange pathway even when the intermediate CT states approach resonance. 
 
 For the example of Y6 (BTP-4F), a fused-ring electron acceptor of some technical importance, we show that the chemical design has created a material where this resonance occurs at the intermolecular packing spacing, driving maximally fast triplet transfer. 
 \jarv{To be confirmed!}
@@ -208,7 +210,7 @@ Diagram.
 \caption{Diabatic three-state Jablonski diagram. 
 Transfer can be by direct two-particle exchange ($V_{2p}$, dotted line) or by super-exchange via a virtual charge-transfer (CT) state (here just $| D^+ A^- \rangle$ is shown, though of course the opposite order can occur with a potentially different $\Delta E_{CT}$). 
 The process is by sequential single-particle electron ($t_e$) and hole ($t_h$) (and vice versa) transfers. 
-$\Delta E_{CT}$ is the energy of the CT state relative to the initial donor triplet; as usual $\Delta G$ represents the thermodynamic driving force from the reactan to the product.}
+$\Delta E_{CT}$ is the energy of the CT state relative to the initial donor triplet; as usual $\Delta G$ represents the thermodynamic driving force from the reactant to the product.}
     \label{fig:diabatic_jablonski}
 \end{figure}
 
@@ -217,7 +219,7 @@ The most obvious physical picture is the direct simultaneous transfer of the hol
 Eqn
 
 
-Early work focused on evaluating this integral. Due to this overlap of four orbitals, if we have an election transfer integral which scales as ... We should expect to see double this exponential for two simultaneous electrons. 
+Early work focused on evaluating this integral. Due to this overlap of four orbitals, if we have an election transfer integral which scales as ... We should expect to see double this exponential for two simultaneous electrons. \jarv{From 2026-09-01 Zoom, Izzy thinks this might be mistaken, and that you recover the same scaling for V1p superexchange due to the two Ve Vh terms. Probably best to get some data from Tom's actual final results before then discussing.}
 
 An alternative process is that of super exchange, where electrons transfer sequentially via a charge transfer (CT) state. It has been recognised since the 1990s, that as this is fundamentally controlled by individual electron transport steps, it has vastly reduced scaling with distance than the simultaneous two-particle route, and that it therefore dominates in the relatively large molecules of technical relevance for organic optoelectronic materials. 
 
@@ -308,7 +310,7 @@ An alternative process is that of super exchange, where electrons transfer seque
     \end{scope}
 \end{tikzpicture} }
 
-\caption{Slater orbital diagram for the most simple HOMO--LUMO triplet excitation, transfering via the superexchange pathway.}
+\caption{Slater orbital diagram for the most simple HOMO--LUMO triplet excitation, transferring via the super exchange pathway.}
     \label{fig:superexchange_slater_diagram}
 \end{figure}
 
@@ -322,7 +324,7 @@ The often quoted expression is
 where $t_e$ and $t_h$ are the electron and hole transfer integrals, and $\Delta E_{CT}$ is the relative energy of the charge transfer state. 
 
 Clearly the $1/\Delta E_{CT}$ component suggests a perturbation theory origin for this expression. 
-The preturbation theory result becomes singular at the resonance condition, where the CT state is isoenergetic with the excited state. 
+The perturbation theory result becomes singular at the resonance condition, where the CT state is isoenergetic with the excited state. 
 In a drive to optimise charge separation, which proceeds via a charge transfer state, modern optoelectronic materials have intentionally designed in this degeneracy. 
 
 Therefore in this paper we will first investigate the origins of this $V_{1p}$ expression, provide non-perturbative solutions, and then develop methods to evaluate the charge transfer state energy, and a configuration interaction generalisation of the counterpoise corrected dimer projection method. 
@@ -348,7 +350,7 @@ In this three-state effective diabatic system, following Ratner\cite{Ratner1990}
 %
 Here, $t_e$ and $t_h$ represent the \emph{effective} one-electron matrix elements evaluated between the spin-adapted many-body wavefunctions of the initial, CT, and final states.
 \jarv{Are these what you call the 'orbital' transfer integrals Tom?}
-Any spin-integration permutation prefactors\cite{Krueger1998} are asbrobed into $t$ for notational simplicity. 
+Any spin-integration permutation prefactors\cite{Krueger1998} are absorbed into $t$ for notational simplicity. 
 To simplify the later eigenvalue algebra, we set the donor $\ket{D^T A}$ state to have an energy of zero. 
 The $V_{2p}$ terms are set to zero (top-right and bottom-left). 
 The matrix equations below would generalise to naturally include this term if required. 
@@ -430,7 +432,7 @@ Therefore the eigenvalues are particularly simple, $\lambda = \{ - \sqrt{t_e^2 +
     V_{eff}^{max} = \frac{1}{2} \sqrt{t_e^2 + t_h^2} .
 \end{equation}
 %
-Therefore, at resonance, the effective superexchange does not diverge but becomes the geometric mean of the composite $t_e$ and $t_h$. 
+Therefore, at resonance, the effective super exchange does not diverge but becomes the geometric mean of the composite $t_e$ and $t_h$. 
 This is a rigorous upper limit for triplet transport, and shows how the rate of transfer benefits directly from approaches to maximise (ambipolar) charge transfer in organic electronic materials. 
 
 \subsubsection{General solution}
@@ -516,15 +518,16 @@ This is identical to to the definition of the exciton binding energy, where $E_{
 Ignoring for now the interaction terms between the polarisation fields, the distant-dependent CT state is the screen Coulomb interaction of the bare charges, 
 
 \begin{equation}
-    \Delta E_{CT}(r) = \Delta E_{CT}(\infty) - \frac{e^2}{4\pi \epsilon_0 \epsilon_/infty}\frac{1}{r},  
+    \Delta E_{CT}(r) = \Delta E_{CT}(\infty) - \frac{e^2}{4\pi \epsilon_0 \epsilon_\infty}\frac{1}{r},  
 \end{equation}
 
-where $e$ the electron charge, $\epsilon_0$ the permittivty of free space, and $\epsilon_\infty$ the optical dielectric constant. 
+where $e$ the electron charge, $\epsilon_0$ the permittivity of free space, and $\epsilon_\infty$ the optical dielectric constant. 
 
 Therefore, there is always an isoenergetic charge-transfer crossing point ($\Delta E_{CT}(r) = 0$). 
 Reduction of exciton binding energy results in this point moving to larger separations, pushing this point out to intermolecular distances.
 
-\jarv{IP / EA / P estimations here for Y6, showing at what distance the isoenergetic point is. Estimate the crossing point for Y6 c.f. other materials.}
+\jarv{IP / EA / P estimations here for Y6, showing at what distance the isoenergetic point is. Estimate the crossing point for Y6 c.f. other materials. 
+We should be able to directly use, and finally therefore publish, our DLPNO calculation on Y6!}
 
 \subsection{Configuration-interaction dimer projection method}
 
@@ -533,15 +536,18 @@ Reduction of exciton binding energy results in this point moving to larger separ
 In the below we generally follow the nomenclature of Bai et al.\cite{Bai2020}. 
 
 Triplet energy transfer (TET) is driven primarily by Dexter coupling\cite{You2013}. This is composed of one- and two-particle contributions. The one particle transfer $V_{1p}$ occurs through a two step process, with the electron and hole are transferred via a virtual CT state. 
+
 \begin{equation}
     V_{1p} = - \frac{V_eV_h}{\Delta E}
 \end{equation}
-TET occurs in a two step process via `virtual' CT diabatic states. $V_e$ and $V_h$ are the electron and hole couplings respectively, whilst $\Delta E$ is the difference in energy between the intermediate diabatic CT states. In the picture where only the HOMO and LUMO are involved in TET, $V_e$ and $V_h$ are the transfer intergrals between the LUMO orbitals on each of the monomers and the HOMO orbitals on each of the monomers respectively. The electron and hole couplings are analogous to the transfer integral between the LUMO orbitals on each monomer and HOMO orbitals on each monomer respectively.
+%
+TET occurs in a two step process via `virtual' CT diabatic states. $V_e$ and $V_h$ are the electron and hole couplings respectively, whilst $\Delta E$ is the difference in energy between the intermediate diabatic CT states. In the picture where only the HOMO and LUMO are involved in TET, $V_e$ and $V_h$ are the transfer integrals between the LUMO orbitals on each of the monomers and the HOMO orbitals on each of the monomers respectively. The electron and hole couplings are analogous to the transfer integral between the LUMO orbitals on each monomer and HOMO orbitals on each monomer respectively.
 
 The two particle contribution,
 \begin{equation}
-    V_{2p} = \int dr_A \, dr_B \quad \frac{1}{|r_A-r_B|} S_{AB}(1)S_{AB}(2),
+    V_{2p} = \int dr_A \, dr_B \quad \frac{1}{|r_A-r_B|} S_{AB}(1)S_{AB}(2) \quad,
 \end{equation}
+%
 involves a simultaneous transfer of electrons between the two monomers, where $|r_A-r_B|$ is the separation between the planes of each of the monomers . 
 This is mediated by orbital overlap between the monomers, $S_{AB}(1)$ and $S_{AB}(2)$, which correspond to the orbitals involved in the transfer of each electron respectively.
 
@@ -581,7 +587,7 @@ In this work we propose an extension of this method to be able to describe the t
 \begin{equation}
     \Psi_{state} = \sum_i c_i\psi_i,
 \end{equation}
-and hence we obtain the analog for $J^{AB}$ between excited states $i$ and $j$,
+and hence we obtain the analogue for $J^{AB}$ between excited states $i$ and $j$,
 \begin{equation}
     J^{AB}_{IJ} = \sum_i\sum_j\sum_kc_i^*\langle\phi_i^A|\psi_k\rangle\langle\psi_k|H|\psi_k\rangle\langle\psi_k|\phi^B_j\rangle c_j.
 \end{equation}
@@ -648,7 +654,7 @@ We begin with the definition of the Hamiltonian and Overlap matrix for a dimer c
         S_{AB} &1
     \end{bmatrix}.
 \end{equation}
-We use the method to obtain the transfer integrals, as shown by Baumeier et al. \jarv{Cite correctly.} To obtain, the off-diagonal elements of $\underline{H}$,
+We use the method to obtain the transfer integrals, as shown by Baumeier et al. \jarv{Tom, please cite correctly.} To obtain, the off-diagonal elements of $\underline{H}$,
 \begin{equation}
     J_{AB} =\bra{\phi^A}\hat{H}\ket{\phi^B},
 \end{equation}
@@ -667,7 +673,7 @@ An excited state can be expressed as a linear combination of ground state orbita
 \begin{equation}
    \ket{ \Phi }= \sum_i c_i \ket{\phi_i}
 \end{equation}
-Inserting this into (9 \jarv{use a proper ref + label}) yields $\langle\Phi^A|H|\Phi^B\rangle$,
+Inserting this into (9 \jarv{Tom, use a proper ref + label rather than hardcoding}) yields $\langle\Phi^A|H|\Phi^B\rangle$,
 \begin{equation}
     J_{AB}^{state} = \sum_i\sum_j\sum_k c_i^*c_j \braket{\phi^A_i}{\psi_k}\braket{\psi_k}{\hat{H}|\psi_k}\braket{\psi_k}{\phi^B_j}.
 \end{equation}
