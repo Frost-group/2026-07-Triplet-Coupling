@@ -1,0 +1,88 @@
+% =============== 26th August 2026 --- Version 0.0.2 ======================
+%         FROST GROUP TEMPLATE: REVTeX 4-2 WITH ZAPF TYPOGRAPHY
+% ======== https://github.com/Frost-group/Frost-LaTeX-templates ===========
+\documentclass[aps,physrev,reprint,superscriptaddress,nofootinbib,amsmath,amssymb,a4paper]{revtex4-2}
+% For peer review draft: swap 'reprint' -> 'preprint' and add 'linenumbers'
+
+% BIBLIOGRAPHY: Generate a clean bibliography via https://www.doi2bib.org/
+%    check individual entries as you add them: don't shotgun them in
+% Citation keys look like "Frost2016"; so adding a descriptive noun suffix 
+% can be useful if you are citing a group / author a lot, e.g. "Frost2017PolaronPRB"
+
+% --- Typography & Fonts ---
+%  Of course, the journal will override this, but this is for us and the ArXiv
+\usepackage[T1]{fontenc}
+\usepackage{newpxtext}                     % Palatino body text
+\usepackage[eulergreek,rmdefault]{eulervm} % Euler math font, clean and upright
+%\usepackage{newpxmath}                     % Palatino math font alternative to Euler, has slanted letters
+
+% --- Maths & Physics ---
+\usepackage{mathtools}
+%basic bra/kets with the above directly, avoiding the deprecated physics package
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+\DeclarePairedDelimiterX\matrixel[3]{\langle}{\rangle}{#1 \delimsize\vert #2 \delimsize\vert #3}
+\DeclarePairedDelimiterX\comm[2]{[}{]}{#1, #2}
+\DeclarePairedDelimiterX\acomm[2]{\{}{\}}{#1, #2}
+\DeclarePairedDelimiter\expect{\langle}{\rangle}
+
+\usepackage{bm}                            % Bold math variables
+\usepackage{siunitx}                       % Modern usage: \qty{\sim 200}{\kelvin}
+\usepackage{derivative}
+\usepackage{mleftright}
+% Enforce correct spacing for \left and \right globally
+\mleftright
+
+% --- Graphics & Formatting ---
+%  \usepackage{subfig} % try not to use this! breaks RevTex often
+%  DO NOT use caption / subcaption: RevTex hates it 
+\usepackage{graphicx}
+\usepackage{dcolumn}                       % Align table columns on decimal point
+\newcolumntype{d}[1]{D{.}{\cdot}{#1}}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}               % for Slater-diagram electron arrows
+\usepackage{xcolor,soul}                   % Text highlighting
+
+% --- Notes to self... --- 
+%  use these for writing comments to one-another in preference to Overleaf
+% built-in, or writing on Zulip. That way the discussions persists in the git
+% history of the Paper. Pick a colour and add yourself!
+% Good colours for screen (not too bright) and B&W printing (distinct from black) include:
+%     red, purple, teal, olive, brown, darkgray, violet
+\newcommand{\nb}[1]{\textcolor{red!50!black}{[NB: #1]}}
+\newcommand{\jarv}[1]{\textcolor{purple}{[Jarv: #1]}}
+% 
+\newcommand{\izzy}[1]{\textcolor{teal}{[AuthorA: #1]}}
+\newcommand{\tom}[1]{\textcolor{orange!80!black}{[AuthorB: #1]}}
+\newcommand{\authorC}[1]{\textcolor{green!40!black}{[AuthorC: #1]}}
+
+\begin{document}
+\title{Supplementary Information Triplet Exciton Transfer: The Counterpoise Approach}
+% Calculating triplet transfer from 
+\date{\today} % useful to track hard copy of drafts
+
+\author{Tom Ward}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\author{Isabel Creed}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\author{Jarvist Moore Frost}
+\affiliation{Department of Chemistry, Imperial College London, Exhibition Road, London  SW7 2AZ, UK}
+\email[Electronic mail:]{jarvist.frost@imperial.ac.uk}
+\keywords{path-integral, Monte Carlo}
+
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\linewidth]{Pyrene_twist_ESID_vs_Counterpoise.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure*}
+
+
+\end{document}
