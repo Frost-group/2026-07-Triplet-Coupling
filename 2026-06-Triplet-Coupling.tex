@@ -199,7 +199,7 @@ and further simplifies to
 \begin{equation}
     V_{1p} = -2\left(\frac{t_et_h}{\Delta E_{CT}}\right) ,
 \end{equation}
-in the case of a homo-dimer and where there is a point of inversion between the two monomers. 
+in the case of a centrosymmetric dimer system. 
 
 The final TET integral - considering only the two lowest energy in CT states - is therefore given by: 
 \begin{equation}
@@ -224,15 +224,22 @@ In order to calculate the triplet transfer integral $J_{TET}$ given in eq. \ref{
 \end{equation}
  with $H$  the dimer hamiltonian. As the adjacent monomer orbitals are not orthogonal, they are projected onto the dimer orbitals. By inserting the dimer identity operator, $\hat{1}= \sum_i\ket{\phi_i}\bra{\phi_i}$, in to Eq.\ \eqref{initial JAB} either side of $H$, and noting that the dimer orbitals are orthogonal, the transfer integral becomes:
 \begin{equation}\label{initial JAB}
-    J_{AB} = \sum_i \braket{\phi_A}{\psi_k}\braket{\psi_k}{H|\psi_k}\braket{\phi_A}{\psi_k} . 
+    J_{AB} = \sum_i \braket{\phi_A}{\psi_i}\braket{\psi_i}{H|\psi_i}\braket{\phi_A}{\psi_i} . 
 \end{equation}
 
-These are the orbital transfer integrals, $t_e$ and $t_h$, that are used in the calculation of the electron and hole couplings. In a similar manner, the orbital overlap terms, $S_{AB}(1)$ and $S_{AB}(2)$ are taken as $\sum_k\braket{\phi_A }{\psi_k}\braket{\psi_k}{\phi_B}$. The use of the DIPRO, in conjunction with a counterpoise basis set in the electronic structure calculations to obtain monomer orbitals, addressed both the dimer hamiltonian eigenfunction problem and also corrects for the BSSE energy\cite{Baumeier2010}.
+These are the orbital transfer integrals, $t_e$ and $t_h$, that are used in the calculation of the electron and hole couplings. In a similar manner, the orbital overlap terms, $S_{AB}(1)$ and $S_{AB}(2)$ are taken as $\sum_i\braket{\phi_A }{\psi_i}\braket{\psi_i}{\phi_B}$. The use of the DIPRO, in conjunction with a counterpoise basis set in the electronic structure calculations to obtain monomer orbitals, addressed both the dimer hamiltonian eigenfunction problem and also corrects for the BSSE energy\cite{Baumeier2010}.
 
 \subsection{Charge Transfer States}
 
 
 In order to calculate Eq. \ref{Final_coupling} the final parameters needed are the energy differences between the two charge transfer states and the monomer's triplet $T_1$ state, $\Delta E_{CT(A^+D^-)}$ and  $\Delta E_{CT(A^-D^+)}$. Identifying the diabatic charge transfer states of interest from dimer electronic structure calculations proves challenging. Methods that constrain charges to specified molecules are sensitive to the choice of boundary and partition\cite{Wu2006}. Additionally, time-dependant density functional theory (TD-DFT) is known to underestimate the energy of CT states due to the self-interaction energy \cite{Ziegler2010, Dreuw2003, Hedegrd2013}. Further, many functionals used in TD-DFT calculations fail to correctly describe the long-range behaviour of CT states \cite{Azzouzi2018, Dev2012}. Work using optimally tuned functionals to model CT states in Y6 and other NFAs found that these can describe this behaviour\cite{Ward2026}. However, the challenge with selecting diabatic states remains.
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=\textwidth]{separation_2x2.png}
+    \caption{Monomer separation dependence of the TET coupling for a sample of ethene and a series of PAH model dimer systems. The ESID coupling value is shown (crosses). The full counterpoise TET coupling (circles) is shown, as are its constituent elements, $V_{1p}$ (triangles), and $V_{2p}$ (inverted triangles).  The distance decay rate of each method is given by $\beta$, measured at an intermediate separation of 4.8 $\AA$. }
+    \label{Distance Scan}
+\end{figure*}
 
 We therefore turn to a semi-analytical approach to the calculation of the energy of the diabatic CT states of interest. We define the CT energy, relative to the triplet state on D as 
 \begin{equation}
@@ -244,38 +251,65 @@ We therefore turn to a semi-analytical approach to the calculation of the energy
 \end{multline}
 with $q$,$\mu$ and $\Theta$ being the charge, dipole and quadrupole on each atom, which contributes to the molecular multipole. $R$ is the separation between the atoms $i$ and $j$. The terms included in the interaction energy $E_{ij}$ are the charge-charge (classical coulombic interaction), charge-dipole, dipole-dipole, and charge-quadrupole interactions.
 
+
+
 \subsection{Computational details}
 TD-DFT calculations, with the Tamm-Dancoff approximation applied, on the sample of model dimers were run using the Gaussian16\cite{g16} electronic structure code. Three single point calculations are needed to obtain the electron and hole transfer integrals: one for each monomer with a counterpoise basis set, and one for the full dimer to obtain the orbitals that the monomer orbitals are projected onto. To obtain the CT energies, ionisation energies, electron affinities and triplet energies are obtained from monomer single point calculations, the geometries of the an-/cationic monomers are not re-optimised as the electron transfer occurs within the Frank-Condon region of the dimer. For distributed multipole analysis, the monomer an-/cation single point calculations are processed using the Fuzzy Atom function\cite{Pends2006} implemented in Multiwfn\cite{Lu2011}. 
 
 \section{Results and Discussion}
-We compute the TET couplings using our approach, including only monomer HOMO and LUMO orbitals when calculating $V_{1p}$ and $V_{2p}$. With a sample of model centro-symmetric dimer systems, we first benchmark our method against the energy splitting in dimer (ESID) value. The energy gap between dimer excited states that arises from the interaction between local excitons on each of the monomers is given as:
-\begin{equation}
-    \Delta E = \sqrt{(\epsilon_A-\epsilon_B)^2+4V^2},
-\end{equation}
-where $\epsilon_A$ and $\epsilon_B$ are the energies of the interacting states on monomer A and B, and $V$ is the coupling between the local excitons.
-We initially consider the behaviour of the TET coupling predicted by our method as the intermolecular separation in the set of model dimers is increased. As this preserves the centro-symmetry of the system, we compare this to the ESID results.
-\begin{figure*}[b]
-    \centering
-    \includegraphics[width=\textwidth]{Displacement_check_2.pdf}
-    \caption{Monomer separation dependence of the TET coupling for a sample of model dimer systems. All results are obtained from TDDFT calculations using B3LYP/6-311G*. The coupling decays exponentially with an increase in separation ($r$) : $J \sim e^{-\alpha r}$. The decay rate for each dimers is given as: Naphthalene: }
-    \label{Distance Scan}
-\end{figure*}
-In the simple ethene dimer system, strong agreement between our method and the ESID values is shown, both for the coupling magnitude and the distance-dependant decay rate of the coupling. Whilst our method demonstrates good agreement with the ESID value for the polyaromatic dimer systems, most notably at small separations, there is an apparent deviation in the two coupling values that is becomes increasingly pronounced with system size. Valeev \textit{et al.\ } proposed that this arises due a polarisation contribution that increases the splitting between the two dimer states \cite{Valeev2006}. Large molecules will extended conjugated $\pi$ systems, such as pentacene, are know to have a higher polarisability than small systems such as ethene. \tom{Although the DIPRO method accounts for the polarisability effects so maybe a different arguement is needed here} 
 
-Additionally, we compared our method to a the frontier orbital overlap approach used by Bai \textit{et al.\ }, where the TET coupling is given as $\kappa S_{\pi_D^*\pi_A^*}S_{\pi_D\pi_A} $\cite{Bai2020}. This approach uses a semi-empirical parameter, $\kappa$, to contain the CT state energies; for Naphthalene this is 24 eV \cite{Bai2020}. In Fig \eqref{Distance Scan}, we show that at short separations, this approach underestimates the TET coupling to a greater degree than our approach, whilst overestimating the coupling at intermediate separations of around 5 $\AA$. There is therefore an apparent need for separation and orientation specific properties to be included in the calculation of the TET coupling. This is not achieved when semi-empirical paramters are applied to systems beyond the point where they are calculated at.
-\begin{figure}
+
+In order to validate our method, we first in Figure \ref{Distance Scan} compute the TET couplings for centro-symmetric dimers of napthalene, antracene, ethene and penetacene, and benchmark these against the energy splitting in dimer (ESID) result, which is the exact triplet coupling in centrosymmetric dimers. 
+
+
+
+Figure \ref{Distance Scan} shows that for simple ethene dimer system, there is strong agreement between our method and the ESID values, both for the coupling magnitude and the distance-dependant decay rate of the coupling. Although our method demonstrates good agreement with the ESID value for the polyaromatic dimer systems, most notably at small separations, there is a small deviation in the two coupling values that becomes more pronounced with system size. Valeev \textit{et al.\ } proposed that this arises due a polarisation contribution that increases the splitting between the two dimer states \cite{Valeev2006}. Large molecules will extended conjugated $\pi$ systems, such as pentacene, are know to have a higher polarisability than small systems such as ethene. \tom{Although the DIPRO method accounts for the polarisability effects so maybe a different arguement is needed here} 
+
+Additionally, in Figure \ref{Distance Scan} we compare our method for napthalene to the approach of  Bai \textit{et al.\ }  where the TET coupling is given as $\kappa S_{\pi_D^*\pi_A^*}S_{\pi_D\pi_A} $ with $\kappa=24eV$ \cite{Bai2020}. We determine the orbital overlaps $S_{\pi_D^*\pi_A^*}$ and $S_{\pi_D\pi_A}$ using the same DIPRO approach used in our method to determine $V_{1p}$ and $V_{2p}$. The semi-empirical parameter, $\kappa$, contains information on the CT state energies, which weights the 1 particle coupling term. This was shown to be 24 eV for the naphthalene dimer, calculated at an intermolecular separation of 3.5 $\AA$ \cite{Bai2020}. In Figure  \ref{Distance Scan}, we show that at short separations, this approach underestimates the TET coupling to a greater degree than our approach, whilst overestimating the coupling at intermediate separations of around 5 $\AA$. 
+
+This behaviour is naturally expected; the magnitude of $\kappa$ is determined in part by one over the energy difference between the CT state and the triplet state at one specified distance.  At smaller monomer separations than this distance, e.g. 3 $\AA$ in figure \ref{Distance Scan}, the energy difference between the CT state to the triplet state is lower, as the CT state is stabilised by the greater coulombic interaction at short distances. This means the effective $\kappa$ term is larger here, as there is a greater contribution from the 1-particle coupling. This leads    to an underestimation of the TET coupling. By contrast, at longer separations, the energy gap between the CT state and the triplet state is larger than at $3.5  \AA$, which physically should suppress the  $V_{1p}$. This physics is not captured by a fixed $\kappa$ value and leads to a larger than physical TET coupling at longer distances. 
+\begin{figure*}
     \centering
-    \includegraphics[width=\linewidth]{Hexatriene_slip.pdf}
-    \caption{Caption}
-    \label{fig:placeholder}
+    \includegraphics[width=\linewidth]{separation_naphthalene_CAM.png}
+    \caption{Separation dependence of the TET coupling in the naphthalene dimer, calculated using a CAM-B3LYP/6-311G** level of theory. We compare our counterpoise coupling (circles) with the semi-empirical approach used in Bai \textit{et al.\ }\cite{Bai2020} (squares). We also compare these methods against the ESID values (crosses). The distance decay rate of each method is given by $\beta$, measured at an intermediate separation of 4.8 $\AA$. }
+    \label{Pyrene Rotation}
+\end{figure*}
+ 
+ Figure \ref{Distance Scan} shows that the issue of a fixed value $\kappa$ in napthalene, while important in understanding that the method of Bai \textit{et al}\cite{Bai2020} does not fully capture the physics of triplet coupling, the deviations are relatively small. This is due to the large energy gap between the triplet and CT state in napthelene. Modern FREAs such as Y6, however, have relatively small gaps between the triplet and CT states\cite{creed2026quantum, Ward2026} which means the 1-particle contribution is much more sensitive to intermolecular separation and orientation. In these systems, applying a single semi-empirical parameter, obtained from a single representative dimer, to these materials is unsuitable and likely to drastically over/underestimate the coupling for the other representative dimers, and to mean that the physics of the triplet transfer in these materials is not fully captured. 
+In our method, we calculate a specific CT energy for each triplet transfer integral, which enables our approach to capture this part of the physics. 
+
+
+As the centro-symmetry of the dimer system is broken, for example through the rotation of one of the monomers, we expect there to be a significant deviation between the true TET coupling the ESID value. This is due to the loss of degeneracy between the two monomer states. We use a model pyrene model dimer, and rotate one of the monomers about its x-axis. The results in Fig.\ \eqref{ESIDvCounterpoise Rotation} of this rotation scan, demonstrate the clear deviation of our coupling value from the ESID coupling. Previous work that developed a GW-BSE-DIPRO approach to calculating TET used the pyrene dimer as a model system \cite{Wehner2017}. We compare our results to this method in Fig.\ \eqref{Pyrene Rotation}. Agreement on the relative magnitude of the couplings is observed between the two methods. Additionally, the nodal points in the coupling, at around 45$^o$ and 60$^o$ where the TET coupling goes to zero, are observed in both our approach and the literature.
+
+The behaviour of the coupling as monomers go from face-on overlap to end-to-end overlap is of interest, particularly in OPV materials, where different packing formations favour triplet transfer. We therefore consider the triplet coupling in the hexatriene dimer system, and its behaviour as it goes from a face-on to an end-on dimer. The coupling in this system has previously been studied using an frontier orbital overlap approach \cite{Hartzler2018}, however, this only calculates the two-particle contribution. The absence of $V_{1p}$, which is included in our method, is likely to cause the frontier overlap method to underestimate the TET coupling at short-slip distances, compared to our approach, as shown in Fig.\ \eqref{Hexatriene Slip}. The difference between the two methods appears to decrease with slip distance, likely due to the accompanied increase in CT state energy, which further reduces the one-particle coupling contribution. Importantly, our method is able to capture the correct nodal points of the coupling. These occur when the slip leads to zero net overlap between the molecular orbitals on each of the monomers. 
+
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[width=\linewidth]{esid_rotation_2panel.png}
+    \caption{Rotation scan of the face-on pyrene dimer, with an intermonomer separation of 6.5 $\AA$. One monomer is fixed whilst the other monomer rotates about its x-axis. We compare the coupling given by our counterpoise approach (squares) and the ESID in dimer result (crosses). The coupling given by both methods rapidly diverges as the angle of rotation increases and the centro-symmetry of the system is broken. TD-DFT calculations are run using a 6-311G* basis set and a B3LYP (left) or a PBE0 (right) functional.}
+    \label{ESIDvCounterpoise Rotation}
+\end{figure*}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{slip_coupling.png}
+    \caption{TET coupling in the Hexatriene dimer, with a intermolecular separation of 3.5 $\AA$ as a function of slip distance. We compare our counterpoise method (circles) with a frontier orbital overlap approach\cite{Hartzler2018} (squares). Electronic structure calculations are run using 6-311G*/B3LYP}
+    \label{Hexatriene Slip}
 \end{figure}
 
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\linewidth]{Pyrene_twist.pdf}
-    \caption{Enter Caption}
-    \label{fig:placeholder}
+    \includegraphics[width=\linewidth]{rotation_2panel.png}
+    \caption{Zoomed in view of the absolute value of  the counterpoise TET coupling (squares) in the Pyrene dimer, with an intermolecular separation of 6.5 $\AA$ shown in fig.\ \eqref{ESIDvCounterpoise Rotation}. The constituent 1- and 2-particle couplings are shown (triangles \& circles respectively) are also shown . }
+    \label{Pyrene Rotation}
+\end{figure*}
+\begin{figure*}
+    \centering
+    \includegraphics[width=\linewidth]{b3lyp_8.5A.png}
+    \caption{The magnitude of the counterpoise TET coupling (squares), obtained with a 6-311G*/B3LYP level of theory, in the Pyrene dimer, now with an intermolecular separation of 8.5 $$\AA$$ shown in fig.\ \eqref{ESIDvCounterpoise Rotation}. The constituent 1- and 2-particle couplings are shown (triangles \& circles respectively) are also shown . }
+    \label{Pyrene Rotation}
 \end{figure*}
 
 \begin{acknowledgements}
