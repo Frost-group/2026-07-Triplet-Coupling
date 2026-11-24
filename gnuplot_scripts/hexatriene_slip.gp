@@ -24,11 +24,10 @@ set tics scale 0.9
 set tics font ',20'
 set grid noxtics noytics
 
-# The first extracted-paper value is missing in data.txt and is omitted.
-plot 'data.txt' using 1:12 with linespoints \
+plot 'hexatriene_slip.txt' using 1:12 with linespoints \
          linecolor rgb '#e41a1c' linewidth 2.4 \
          pointtype 5 pointsize 2.8125 notitle, \
-     'data.txt' using 1:11 with linespoints \
+     'hexatriene_slip.txt' using 1:11 with linespoints \
          linecolor rgb '#0000ff' linewidth 2.4 \
          pointtype 7 pointsize 2.8125 notitle
 

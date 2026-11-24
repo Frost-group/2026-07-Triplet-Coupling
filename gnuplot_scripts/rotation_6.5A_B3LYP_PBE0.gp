@@ -36,17 +36,17 @@ set title 'B3LYP' font ',20'
 set xlabel 'Rotation (degrees)' font ',20'
 set ylabel 'Coupling (10^{-5} eV)' font ',20'
 plot \
-    'rotation_scan_data.txt' using 1:($15*1e5) smooth csplines \
+    'b3lyp_rotation_scan_data.txt' using 1:($15*1e5) smooth csplines \
         with lines linecolor rgb '#e41a1c' linewidth 2.4 notitle, \
-    'rotation_scan_data.txt' using 1:($14*1e5) smooth csplines \
+    'b3lyp_rotation_scan_data.txt' using 1:($14*1e5) smooth csplines \
         with lines linecolor rgb '#0000ff' linewidth 2.4 notitle, \
-    'rotation_scan_data.txt' using 1:($4*1e5) smooth csplines \
+    'b3lyp_rotation_scan_data.txt' using 1:($4*1e5) smooth csplines \
         with lines linecolor rgb '#4daf4a' linewidth 2.4 notitle, \
-    'rotation_scan_data.txt' using 1:($15*1e5) with points \
+    'b3lyp_rotation_scan_data.txt' using 1:($15*1e5) with points \
         linecolor rgb '#e41a1c' pointtype 5 pointsize 3.0 notitle, \
-    'rotation_scan_data.txt' using 1:($14*1e5) with points \
+    'b3lyp_rotation_scan_data.txt' using 1:($14*1e5) with points \
         linecolor rgb '#0000ff' pointtype 9 pointsize 3.0 notitle, \
-    'rotation_scan_data.txt' using 1:($4*1e5) with points \
+    'b3lyp_rotation_scan_data.txt' using 1:($4*1e5) with points \
         linecolor rgb '#4daf4a' pointtype 7 pointsize 3.0 notitle
 
 # Panel 2: rotation_scan_data-2.txt
@@ -54,17 +54,17 @@ set title 'PBE0' font ',20'
 set xlabel 'Rotation (degrees)' font ',20'
 set ylabel 'Coupling (10^{-5} eV)' font ',20'
 plot \
-    'rotation_scan_data-2.txt' using 1:($15*1e5) smooth csplines \
+    'pbe_rotation_scan_data.txt' using 1:($15*1e5) smooth csplines \
         with lines linecolor rgb '#e41a1c' linewidth 2.4 notitle, \
-    'rotation_scan_data-2.txt' using 1:($14*1e5) smooth csplines \
+    'pbe_rotation_scan_data.txt' using 1:($14*1e5) smooth csplines \
         with lines linecolor rgb '#0000ff' linewidth 2.4 notitle, \
-    'rotation_scan_data-2.txt' using 1:($3*1e5) smooth csplines \
+    'pbe_rotation_scan_data.txt' using 1:($3*1e5) smooth csplines \
         with lines linecolor rgb '#4daf4a' linewidth 2.4 notitle, \
-    'rotation_scan_data-2.txt' using 1:($15*1e5) with points \
+    'pbe_rotation_scan_data.txt' using 1:($15*1e5) with points \
         linecolor rgb '#e41a1c' pointtype 5 pointsize 3.0 notitle, \
-    'rotation_scan_data-2.txt' using 1:($14*1e5) with points \
+    'pbe_rotation_scan_data.txt' using 1:($14*1e5) with points \
         linecolor rgb '#0000ff' pointtype 9 pointsize 3.0 notitle, \
-    'rotation_scan_data-2.txt' using 1:($3*1e5) with points \
+    'pbe_rotation_scan_data.txt' using 1:($3*1e5) with points \
         linecolor rgb '#4daf4a' pointtype 7 pointsize 3.0 notitle
 
 unset multiplot
